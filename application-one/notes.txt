@@ -1,0 +1,89 @@
+1. Install Java, Maven, IntelliJ
+2. Create account on docker hub and Install Docker Desktop - Docker Runtime Engine
+3. Create Springboot application
+4. Import Springboot application to IntelliJ
+5. Create Rest Endpoint
+6. Create Dockerfile
+7. Create docker image
+8. Push docker image to docker hub repository
+9. Pull docker image from docker hub repository
+10. Run the pulled docker image in our local Computer
+
+
+#Check login
+G:\Altimetrik\Coursera-labs\Spring Boot Upskilling Path\DockerLabs\application-one> docker login
+
+#Build and create an docker image
+docker build -t application-one-img .
+
+#check docker images
+docker images
+
+#tag
+docker tag application-one-img prasadsatish06/application-one-img
+
+#tag version specific, with multiple version
+docker tag application-one-img:latest prasadsatish06/application-one-img:v2
+
+#Push the images docker hub regsitery, by defulat it will take latest and If want to specefic verion, mention version name also
+
+docker push prasadsatish06/application-one-img
+
+docker push prasadsatish06/application-one-img:v2
+
+
+docker images:
+PS G:\Altimetrik\Coursera-labs\Spring Boot Upskilling Path\DockerLabs\application-one> docker images
+REPOSITORY                           TAG       IMAGE ID       CREATED             SIZE
+application-one-img                  latest    131981f9ebfd   About an hour ago   492MB
+prasadsatish06/application-one-img   latest    131981f9ebfd   About an hour ago   492MB
+prasadsatish06/application-one-img   v2        131981f9ebfd   About an hour ago   492MB
+prasadsatish06/application-one-img   v3        131981f9ebfd   About an hour ago   492MB
+
+
+#Delete docker images
+docker rmi application-one-img  prasadsatish06/application-one-img
+Untagged: application-one-img:latest
+Untagged: prasadsatish06/application-one-img:latest
+
+PS G:\Altimetrik\Coursera-labs\Spring Boot Upskilling Path\DockerLabs\application-one> docker images
+REPOSITORY                           TAG       IMAGE ID       CREATED             SIZE
+prasadsatish06/application-one-img   v2        131981f9ebfd   About an hour ago   492MB
+prasadsatish06/application-one-img   v3        131981f9ebfd   About an hour ago   492MB
+
+#Pull images from docker hub and run with different ports
+docker run -p 8090:8080 prasadsatish06/application-one-img:latest
+docker run -p 8091:8080 prasadsatish06/application-one-img
+docker run -p 8092:8080 prasadsatish06/application-one-img
+
+#Hit api in browser with this url:
+http://localhost:8090/api/v1/welcome
+
+#To check, How many containers are running
+docker ps
+
+#Kill the container
+docker kill "containerId"
+
+
+#
+PS G:\Altimetrik\Coursera-labs\Spring Boot Upskilling Path\DockerLabs\application-one> docker ps
+CONTAINER ID   IMAGE                                       COMMAND               CREATED              STATUS              PORTS                    NAMES
+c3c488103fd7   prasadsatish06/application-one-img          "java -jar app.jar"   About a minute ago   Up About a minute   0.0.0.0:8091->8080/tcp   magical_villani
+c0bc2cbceb45   prasadsatish06/application-one-img:latest   "java -jar app.jar"   35 minutes ago       Up 35 minutes       0.0.0.0:8090->8080/tcp   friendly_williams
+
+
+
+
+
+#Docker Commands
+-------------------------
+1. Login to Docker hub -> docker login
+2. Create docker image -> docker build -t <NAME_OF_IMAGE>:<VERSION> .
+3. List all docker images -> docker images
+4. Remove docker images -> docker tag application-one-img application-one-img:v2
+5. Push image to docker hub -> docker push prasadsatish06/application-one-img:latest
+6. Pull and run container -> docker run -p 8090:8080 prasadsatish06/application-one-img:latest
+Note: Port 8090 is on which you want it to access in your host/local machine, 8080 is the exposed port from container
+7. List all running container -> docker ps
+8. Kill a running docker container -> docker kill <CONTAINER_ID>
