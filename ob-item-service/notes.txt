@@ -34,6 +34,12 @@ docker logs springboot-with-mongodb-container-one
 docker exec -it springboot-with-mongodb-container-one bash
 
 17. Forced remove of running container -> docker rm -f <NAME_OF_RUNNING_CONTAINER> <NAME_OF_RUNNING_CONTAINER>
+
+18. Command to delete docker images from local ->
+docker rmi springboot-with-mongodb:v1 prasadsatish06/springboot-with-mongodb:v1
+
+19. Docker compose helps us to run multi container application very easily with a single command.
+
 ----------------------------------------
 MongoDb
 Pull mongo db image from docker hub -> docker pull mongo:latest
