@@ -1,0 +1,59 @@
+#Docker Commands
+-------------------------
+1. Login to Docker hub -> docker login
+2. Create docker image -> docker build -t <NAME_OF_IMAGE>:<VERSION> .
+3. List all docker images -> docker images
+4. Remove docker images -> docker tag application-one-img application-one-img:v2
+5. Push image to docker hub -> docker push prasadsatish06/application-one-img:latest
+6. Pull and run container -> docker run -p 8090:8080 prasadsatish06/application-one-img:latest
+Note: Port 8090 is on which you want it to access in your host/local machine, 8080 is the exposed port from container
+7. List all running container -> docker ps
+8. Kill a running docker container -> docker kill <CONTAINER_ID>
+9. Pull mongo db image from docker hub -> docker pull mongo:latest
+-d ->Run container in deatch/background
+-p ->Publish the port
+10. Command to run mongodb container ->
+   docker run -d -p 28000:27017 --name mongodb-container-one mongo:latest
+
+11. docker build -t springboot-with-mongodb:v1
+12. Retagging local image for pushing to docker hub->
+docker tag springboot-with-mongodb:v1 prasadsatish06/springboot-with-mongodb:v1
+
+13. Push the image to docker hub ->
+ docker push prasadsatish06/springboot-with-mongodb:v1
+
+14. Run springboot  docker container and link it wiht mongodb container
+docker run -p 8090:8081 --name springboot-with-mongodb-container-one --link mongodb-container-one:mongo -d prasadsatish06/springboot-with-mongodb:v1
+docker run -p 8090:8081 --name springboot-with-mongodb-container-one --link mongodb-container-one:mongo -d prasadsatish06/springboot-with-mongodb:v2
+docker run -p 8090:8081 --name springboot-with-mongodb-container-one --link mongodb-container-one:mongo -d prasadsatish06/springboot-with-mongodb:v11
+
+15. Check springboot logs inside docker container -> docker logs <NAME_OF_RUNNING_IMAGE>
+docker logs springboot-with-mongodb-container-one
+
+16.Go Inside a running container ->
+docker exec -it springboot-with-mongodb-container-one bash
+
+17. Forced remove of running container -> docker rm -f <NAME_OF_RUNNING_CONTAINER> <NAME_OF_RUNNING_CONTAINER>
+----------------------------------------
+MongoDb
+Pull mongo db image from docker hub -> docker pull mongo:latest
+
+Run container in detach mode:
+docker run -d
+
+ #Run the mongo db on diff port
+ docker run -d -p 28000:27017 --name mongodb-container-one mongo:latest
+
+
+#Build the images
+docker build -t springboot-with-mongodb:v1 .
+
+#to check the docker images after build
+docker images
+
+#Tag with repository
+docker tag springboot-with-mongodb:v1 prasadsatish06/springboot-with-mongodb:v1
+
+#See logs
+docker logs springboot-with-mongodb-container-one
+
